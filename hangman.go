@@ -7,6 +7,7 @@ import (
 	"os"
 	"strings"
 	"time"
+	"unicode"
 )
 
 type HangManData struct {
@@ -27,7 +28,15 @@ func Setword(words []string, hangmanData *HangManData) {
 	hangmanData.Word = string(guessWord)
 	hangmanData.ToFind = word
 }
+func IsAlphabetic(guess string) bool {
 
+	for _, char := range guess {
+		if !unicode.IsLetter(char) {
+			return false
+		}
+	}
+	return true
+}
 func Meca(guess string, hangmanData *HangManData) bool {
 	hangmanData.UsedLetters = append(hangmanData.UsedLetters, guess)
 
